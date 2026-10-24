@@ -1,0 +1,494 @@
+[
+  {
+    "id": "q_demorgan_01",
+    "concept_id": "demorgan",
+    "secondary_concepts": ["boolean_laws"],
+    "title": "Three-Variable De Morgan Expansion",
+    "question_text": "Apply De Morgan's Theorem to simplify the complemented expression: (A . B . C)'",
+    "question_type": "multiple_choice",
+    "difficulty": "basic",
+    "options": [
+      {"id": "A", "text": "A' + B' + C'"},
+      {"id": "B", "text": "A' . B' . C'"},
+      {"id": "C", "text": "A + B + C"},
+      {"id": "D", "text": "(A + B + C)'"}
+    ],
+    "correct_answer": "A",
+    "distractor_misconceptions": {
+      "B": {
+        "tag": "demorgan_split_no_flip",
+        "rationale": "Distributed complement across literals without flipping the conjunction (AND) operator to disjunction (OR)."
+      },
+      "C": {
+        "tag": "demorgan_partial_inversion",
+        "rationale": "Inverted operator from AND to OR but dropped the complement over individual literals."
+      },
+      "D": {
+        "tag": "demorgan_split_no_flip",
+        "rationale": "Changed the internal operators without distributing individual inversions onto the literals."
+      }
+    },
+    "explanation": "De Morgan's First Law states that (X . Y)' = X' + Y'. Extended to three variables: (A . B . C)' = A' + B' + C'. Remember: 'Break the line, change the sign.'",
+    "follow_up_hint": "Check whether you swapped every '.' to a '+' and placed an apostrophe/bar on every individual literal."
+  },
+  {
+    "id": "q_demorgan_02",
+    "concept_id": "demorgan",
+    "secondary_concepts": ["boolean_laws"],
+    "title": "Nested De Morgan Inversion",
+    "question_text": "Which of the following expressions is strictly equivalent to (X + Y' . Z)' ?",
+    "question_type": "multiple_choice",
+    "difficulty": "intermediate",
+    "options": [
+      {"id": "A", "text": "X' . (Y + Z')"},
+      {"id": "B", "text": "X' + (Y . Z')"},
+      {"id": "C", "text": "X' . (Y' + Z)"},
+      {"id": "D", "text": "X' . Y' . Z"}
+    ],
+    "correct_answer": "A",
+    "distractor_misconceptions": {
+      "B": {
+        "tag": "demorgan_order_of_operations",
+        "rationale": "Applied De Morgan to the inner term without converting the main outer disjunction to conjunction."
+      },
+      "C": {
+        "tag": "demorgan_partial_inversion",
+        "rationale": "Failed to invert the inner literals; kept Y' instead of applying (Y')' = Y and inverted Z improperly."
+      },
+      "D": {
+        "tag": "demorgan_split_no_flip",
+        "rationale": "Treated the compound term Y'.Z as pure literals without decomposing the product term into a sum."
+      }
+    },
+    "explanation": "Let W = (Y' . Z). By De Morgan: (X + W)' = X' . W'. Expanding W' gives (Y' . Z)' = (Y')' + Z' = Y + Z'. Substituting back yields X' . (Y + Z').",
+    "follow_up_hint": "Work from the outermost operator inward: first change the '+' to '.', then complement the remaining subterm."
+  },
+  {
+    "id": "q_demorgan_03",
+    "concept_id": "demorgan",
+    "secondary_concepts": ["boolean_laws"],
+    "title": "Circuit Condition Analysis via De Morgan",
+    "question_text": "A digital circuit outputs HIGH (1) when (P . Q')' = 1. Under what boolean condition is this condition satisfied?",
+    "question_type": "multiple_choice",
+    "difficulty": "intermediate",
+    "options": [
+      {"id": "A", "text": "When P = 0 or Q = 1"},
+      {"id": "B", "text": "When P = 0 and Q = 1"},
+      {"id": "C", "text": "Only when P = 1 and Q = 0"},
+      {"id": "D", "text": "When P = 1 or Q = 0"}
+    ],
+    "correct_answer": "A",
+    "distractor_misconceptions": {
+      "B": {
+        "tag": "demorgan_split_no_flip",
+        "rationale": "Treated (P . Q')' as P' . Q, retaining AND logic instead of converting to OR logic."
+      },
+      "C": {
+        "tag": "complement_inversion_error",
+        "rationale": "Evaluated the uncomplemented expression P . Q' instead of its complement."
+      },
+      "D": {
+        "tag": "demorgan_partial_inversion",
+        "rationale": "Flipped the operator to OR but inverted the logic levels of P and Q backwards."
+      }
+    },
+    "explanation": "Applying De Morgan to (P . Q')' gives P' + (Q')' = P' + Q. The sum P' + Q is 1 whenever P' = 1 (P = 0) OR when Q = 1.",
+    "follow_up_hint": "Apply (A . B)' = A' + B' first before evaluating when the disjunction evaluates to 1."
+  },
+  {
+    "id": "q_demorgan_04",
+    "concept_id": "demorgan",
+    "secondary_concepts": ["boolean_laws"],
+    "title": "Dual Complement Involution",
+    "question_text": "Simplify the dual-expression (A' + B')' using De Morgan's Theorem and involution. Enter the simplified product without spaces (e.g. AB or A.B).",
+    "question_type": "short_answer",
+    "difficulty": "basic",
+    "options": [],
+    "correct_answer": "AB",
+    "distractor_misconceptions": {
+      "A'+B'": {
+        "tag": "demorgan_split_no_flip",
+        "rationale": "Removed outer complement without modifying operators or literals."
+      },
+      "A+B": {
+        "tag": "demorgan_split_no_flip",
+        "rationale": "Inverted literals to A and B but failed to flip '+' to '.'."
+      },
+      "A'B'": {
+        "tag": "demorgan_partial_inversion",
+        "rationale": "Flipped '+' to '.' but neglected involution (A')' = A."
+      }
+    },
+    "explanation": "By De Morgan's theorem, (A' + B')' = (A')' . (B')'. By the law of involution (double negation), (A')' = A and (B')' = B, producing A . B (or AB).",
+    "follow_up_hint": "Break the line above the plus sign: (A')' AND (B')', then cancel out the double bars."
+  },
+  {
+    "id": "q_boolean_01",
+    "concept_id": "boolean_laws",
+    "secondary_concepts": [],
+    "title": "Standard Absorption Law",
+    "question_text": "Simplify the Boolean expression: F = A + A . B",
+    "question_type": "multiple_choice",
+    "difficulty": "basic",
+    "options": [
+      {"id": "A", "text": "A"},
+      {"id": "B", "text": "A . B"},
+      {"id": "C", "text": "A + B"},
+      {"id": "D", "text": "1"}
+    ],
+    "correct_answer": "A",
+    "distractor_misconceptions": {
+      "B": {
+        "tag": "absorption_neglect",
+        "rationale": "Assumed the product term dominates the summation."
+      },
+      "C": {
+        "tag": "distributive_addition_error",
+        "rationale": "Confused the basic absorption identity with the rule of redundancy A + A'B = A + B."
+      },
+      "D": {
+        "tag": "complement_inversion_error",
+        "rationale": "Confused A + A with A + A' = 1."
+      }
+    },
+    "explanation": "By factoring out A: F = A(1 + B). Since (1 + B) = 1 (Null/Dominance law), F = A . 1 = A. This is the Absorption Law.",
+    "follow_up_hint": "Factor out common literal A: A . (1 + B) = ?"
+  },
+  {
+    "id": "q_boolean_02",
+    "concept_id": "boolean_laws",
+    "secondary_concepts": ["demorgan"],
+    "title": "Redundancy Law Simplification",
+    "question_text": "Simplify the expression: F = A + A' . B",
+    "question_type": "multiple_choice",
+    "difficulty": "intermediate",
+    "options": [
+      {"id": "A", "text": "A + B"},
+      {"id": "B", "text": "A"},
+      {"id": "C", "text": "A' + B"},
+      {"id": "D", "text": "B"}
+    ],
+    "correct_answer": "A",
+    "distractor_misconceptions": {
+      "B": {
+        "tag": "absorption_neglect",
+        "rationale": "Incorrectly treated A + A'B as identical to A + AB = A."
+      },
+      "C": {
+        "tag": "distributive_addition_error",
+        "rationale": "Preserved the complemented literal A' instead of the uncomplemented original A."
+      },
+      "D": {
+        "tag": "distributive_addition_error",
+        "rationale": "Dropped the leading literal A entirely."
+      }
+    },
+    "explanation": "Using the second distributive law: A + A'B = (A + A')(A + B). Since A + A' = 1, we get 1 . (A + B) = A + B.",
+    "follow_up_hint": "Use distributive law: X + YZ = (X + Y)(X + Z) where X=A, Y=A', Z=B."
+  },
+  {
+    "id": "q_boolean_03",
+    "concept_id": "boolean_laws",
+    "secondary_concepts": [],
+    "title": "Conjunctive Complementation",
+    "question_text": "According to Boolean algebra theorems, what does the expression (X + Y) . (X + Y') simplify to?",
+    "question_type": "multiple_choice",
+    "difficulty": "intermediate",
+    "options": [
+      {"id": "A", "text": "X"},
+      {"id": "B", "text": "X + Y"},
+      {"id": "C", "text": "X . Y"},
+      {"id": "D", "text": "0"}
+    ],
+    "correct_answer": "A",
+    "distractor_misconceptions": {
+      "B": {
+        "tag": "distributive_addition_error",
+        "rationale": "Failed to complete the multiplication and reduction of Y . Y'."
+      },
+      "C": {
+        "tag": "distributive_addition_error",
+        "rationale": "Confused the distributive outcome with conjunction."
+      },
+      "D": {
+        "tag": "complement_inversion_error",
+        "rationale": "Assumed the entire expression evaluates to 0 because Y and Y' are complements."
+      }
+    },
+    "explanation": "By distributive law in reverse: (X + Y)(X + Y') = X + (Y . Y'). Since Y . Y' = 0, this simplifies directly to X + 0 = X.",
+    "follow_up_hint": "Notice both terms share 'X +'. Recall that (A + B)(A + C) = A + BC."
+  },
+  {
+    "id": "q_boolean_04",
+    "concept_id": "boolean_laws",
+    "secondary_concepts": [],
+    "title": "Idempotent Law Reduction",
+    "question_text": "Evaluate the Boolean identity: What is A + A + A simplified? Enter the single literal answer.",
+    "question_type": "short_answer",
+    "difficulty": "basic",
+    "options": [],
+    "correct_answer": "A",
+    "distractor_misconceptions": {
+      "3A": {
+        "tag": "idempotent_double_count",
+        "rationale": "Treated Boolean addition as standard real arithmetic multiplication."
+      },
+      "A^3": {
+        "tag": "idempotent_double_count",
+        "rationale": "Confused repeated disjunction with repeated multiplication/exponentiation."
+      },
+      "1": {
+        "tag": "complement_inversion_error",
+        "rationale": "Confused identical literal addition with complement addition (A + A' = 1)."
+      }
+    },
+    "explanation": "By the Idempotent Law, A + A = A. Applying it recursively: (A + A) + A = A + A = A. A variable ORed with itself any number of times equals itself.",
+    "follow_up_hint": "In digital logic, 1 OR 1 is 1, and 0 OR 0 is 0. Does A change when ORed with itself?"
+  },
+  {
+    "id": "q_kmap_01",
+    "concept_id": "karnaugh_maps",
+    "secondary_concepts": [],
+    "title": "K-Map Valid Group Size",
+    "question_text": "In a 4-variable Karnaugh Map, which of the following is a strictly VALID group size of adjacent 1s?",
+    "question_type": "multiple_choice",
+    "difficulty": "basic",
+    "options": [
+      {"id": "A", "text": "8"},
+      {"id": "B", "text": "6"},
+      {"id": "C", "text": "3"},
+      {"id": "D", "text": "5"}
+    ],
+    "correct_answer": "A",
+    "distractor_misconceptions": {
+      "B": {
+        "tag": "kmap_non_power_two",
+        "rationale": "Selected a non-power-of-two group size (6 = 2 x 3); K-map groups cannot be size 6."
+      },
+      "C": {
+        "tag": "kmap_non_power_two",
+        "rationale": "Attempted grouping 3 adjacent cells. Valid sizes must be 2^k."
+      },
+      "D": {
+        "tag": "kmap_non_power_two",
+        "rationale": "Attempted grouping 5 cells; groups must strictly be powers of two."
+      }
+    },
+    "explanation": "Every valid grouping in a Karnaugh map must contain 2^k cells (1, 2, 4, 8, 16). Group size 8 corresponds to k=3 and eliminates 3 variables.",
+    "follow_up_hint": "Only powers of 2 (1, 2, 4, 8, 16...) can form valid rectangular groups in a K-map."
+  },
+  {
+    "id": "q_kmap_02",
+    "concept_id": "karnaugh_maps",
+    "secondary_concepts": [],
+    "title": "K-Map Adjacency Rules",
+    "question_text": "A student observes two 1s located at cell (row 0, col 0) and cell (row 1, col 1) in a 2x2 K-map. Can these two cells be grouped directly together into a single 2-cell implicant?",
+    "question_type": "multiple_choice",
+    "difficulty": "basic",
+    "options": [
+      {"id": "A", "text": "No, diagonal grouping is strictly forbidden because adjacent cells must differ by exactly one bit."},
+      {"id": "B", "text": "Yes, because they share a common diagonal corner vertex."},
+      {"id": "C", "text": "Yes, any two cells with value 1 can always be grouped together."},
+      {"id": "D", "text": "No, because groups must always contain at least 4 cells."}
+    ],
+    "correct_answer": "A",
+    "distractor_misconceptions": {
+      "B": {
+        "tag": "kmap_diagonal_grouping",
+        "rationale": "Believed diagonal touching constitutes adjacency in Gray code mapping."
+      },
+      "C": {
+        "tag": "kmap_diagonal_grouping",
+        "rationale": "Ignored geometric and bitwise adjacency constraints."
+      },
+      "D": {
+        "tag": "kmap_non_power_two",
+        "rationale": "Incorrectly claimed that 2-cell groups are invalid (group size 2 = 2^1 is completely valid)."
+      }
+    },
+    "explanation": "Cells in a K-map are adjacent only if their binary coordinates differ by a single bit (Hamming distance 1). Diagonal cells differ by two bits (00 vs 11), so neither variable is eliminated.",
+    "follow_up_hint": "Adjacency in a K-map is strictly horizontal or vertical. Diagonal cells differ by two variables."
+  },
+  {
+    "id": "q_kmap_03",
+    "concept_id": "karnaugh_maps",
+    "secondary_concepts": [],
+    "title": "Corner Wrap-Around Grouping",
+    "question_text": "In a 4-variable (16-cell) K-map, 1s are located at the four extreme corners: m0(0000), m2(0010), m8(1000), and m10(1010). How should these minterms be grouped?",
+    "question_type": "multiple_choice",
+    "difficulty": "intermediate",
+    "options": [
+      {"id": "A", "text": "As a single unified group of 4 minterms using corner wrap-around adjacency."},
+      {"id": "B", "text": "As four isolated groups of 1 minterm each, because they do not touch."},
+      {"id": "C", "text": "As two separate horizontal groups of 2 minterms each."},
+      {"id": "D", "text": "They cannot be grouped because they are separated by 0 cells."}
+    ],
+    "correct_answer": "A",
+    "distractor_misconceptions": {
+      "B": {
+        "tag": "kmap_wrap_around_miss",
+        "rationale": "Failed to recognize toroidal boundary wrap-around between top/bottom and left/right edges."
+      },
+      "C": {
+        "tag": "kmap_wrap_around_miss",
+        "rationale": "Recognized horizontal wrap-around but missed vertical wrap-around to form a 4-cell group."
+      },
+      "D": {
+        "tag": "kmap_wrap_around_miss",
+        "rationale": "Assumed 0s in intermediate cells block boundary wrap-around connections."
+      }
+    },
+    "explanation": "A K-map wraps around like a torus: top edge connects to bottom edge, and left edge connects to right edge. The four corners differ by only two variables and simplify to B' . D'.",
+    "follow_up_hint": "Imagine folding the K-map into a cylinder horizontally and vertically. The four corners meet!"
+  },
+  {
+    "id": "q_kmap_04",
+    "concept_id": "karnaugh_maps",
+    "secondary_concepts": ["boolean_laws"],
+    "title": "Literal Elimination in Groups of Four",
+    "question_text": "When four adjacent 1s are grouped together in a 4-variable K-map, how many input variables are eliminated from the resulting product term? Enter the integer.",
+    "question_type": "short_answer",
+    "difficulty": "intermediate",
+    "options": [],
+    "correct_answer": "2",
+    "distractor_misconceptions": {
+      "4": {
+        "tag": "kmap_non_power_two",
+        "rationale": "Confused the number of cells grouped (4) with the number of variables eliminated."
+      },
+      "1": {
+        "tag": "kmap_redundant_groups",
+        "rationale": "Underestimated variable elimination (group of 2 eliminates 1 variable; group of 4 eliminates 2)."
+      },
+      "3": {
+        "tag": "kmap_non_power_two",
+        "rationale": "Confused remaining literals with eliminated literals."
+      }
+    },
+    "explanation": "A group of size 2^k eliminates k variables. Since 4 = 2^2, k = 2 variables change state within the group and are eliminated, leaving a 2-variable product term (4 - 2 = 2).",
+    "follow_up_hint": "Formula: group size = 2^k, where k is the number of eliminated variables. For size 4 = 2^k, what is k?"
+  },
+  {
+    "id": "q_universal_01",
+    "concept_id": "universal_logic",
+    "secondary_concepts": ["demorgan"],
+    "title": "Synthesizing OR with NAND Gates",
+    "question_text": "To construct a 2-input OR gate (A + B) using ONLY 2-input NAND gates, what configuration is required?",
+    "question_type": "multiple_choice",
+    "difficulty": "intermediate",
+    "options": [
+      {"id": "A", "text": "3 NAND gates: Invert A with one NAND, invert B with a second NAND, and feed both into a third NAND."},
+      {"id": "B", "text": "2 NAND gates: Feed A and B into the first NAND, then invert its output using a second NAND."},
+      {"id": "C", "text": "1 NAND gate: Connect A and B directly to a single NAND gate."},
+      {"id": "D", "text": "4 NAND gates: Connect inputs to an XOR configuration."}
+    ],
+    "correct_answer": "A",
+    "distractor_misconceptions": {
+      "B": {
+        "tag": "nand_or_implementation",
+        "rationale": "Inverting the output of a NAND gate yields AND ( (A.B)'' = AB ), NOT an OR gate."
+      },
+      "C": {
+        "tag": "gate_count_underestimation",
+        "rationale": "Assumed NAND directly computes OR without considering the inversion bar."
+      },
+      "D": {
+        "tag": "nor_and_confusion",
+        "rationale": "Overcomplicated OR synthesis by using an XOR gate architecture."
+      }
+    },
+    "explanation": "By De Morgan's Law, A + B = (A' . B')'. Thus, OR is formed by taking NAND of the inverted inputs A' and B'. This requires 2 NAND gates to invert A and B, plus 1 NAND gate to combine them = 3 NAND gates total.",
+    "follow_up_hint": "Recall De Morgan: A + B = (A' . B')'. What gate performs (Input1 . Input2)'? NAND!"
+  },
+  {
+    "id": "q_universal_02",
+    "concept_id": "universal_logic",
+    "secondary_concepts": ["boolean_laws"],
+    "title": "Tied-Input NOR Gate Operation",
+    "question_text": "If you connect both input pins of a 2-input NOR gate together to a single signal X (so both inputs are X), what logic function does the gate perform?",
+    "question_type": "multiple_choice",
+    "difficulty": "basic",
+    "options": [
+      {"id": "A", "text": "NOT gate (Inverter: X')"},
+      {"id": "B", "text": "Buffer gate (Follower: X)"},
+      {"id": "C", "text": "AND gate (X . X)"},
+      {"id": "D", "text": "Constant 0"}
+    ],
+    "correct_answer": "A",
+    "distractor_misconceptions": {
+      "B": {
+        "tag": "nor_and_confusion",
+        "rationale": "Forgot that the NOR gate inverts its combined output."
+      },
+      "C": {
+        "tag": "nor_and_confusion",
+        "rationale": "Confused the NOR operation with AND operation."
+      },
+      "D": {
+        "tag": "gate_count_underestimation",
+        "rationale": "Assumed self-feeding causes destructive interference to 0."
+      }
+    },
+    "explanation": "For a NOR gate with tied inputs, Output = (X + X)'. By the idempotent law, X + X = X. Therefore, Output = X', which is a standard NOT gate (inverter).",
+    "follow_up_hint": "Calculate Output = (X + X)' using X + X = X."
+  },
+  {
+    "id": "q_universal_03",
+    "concept_id": "universal_logic",
+    "secondary_concepts": [],
+    "title": "Definition of Universal Gate Completeness",
+    "question_text": "Why are NAND and NOR gates officially classified as 'universal logic gates'?",
+    "question_type": "multiple_choice",
+    "difficulty": "basic",
+    "options": [
+      {"id": "A", "text": "Because any Boolean function and any digital circuit can be implemented entirely using only NAND gates or only NOR gates."},
+      {"id": "B", "text": "Because they operate at higher clock frequencies than standard AND/OR gates."},
+      {"id": "C", "text": "Because they can accept an unlimited number of simultaneous digital inputs."},
+      {"id": "D", "text": "Because they do not require power or ground connections."}
+    ],
+    "correct_answer": "A",
+    "distractor_misconceptions": {
+      "B": {
+        "tag": "gate_count_underestimation",
+        "rationale": "Confused architectural functional completeness with silicon clock frequency."
+      },
+      "C": {
+        "tag": "gate_count_underestimation",
+        "rationale": "Confused universality with gate fan-in capacity."
+      },
+      "D": {
+        "tag": "gate_count_underestimation",
+        "rationale": "Physical impossibility; all semiconductor logic gates require power and ground."
+      }
+    },
+    "explanation": "In Boolean logic, a set of gates is universal (functionally complete) if it can synthesize NOT, AND, and OR. Both NAND alone and NOR alone can synthesize all three operations.",
+    "follow_up_hint": "Universality refers to functional completeness: the ability to build any truth table."
+  },
+  {
+    "id": "q_universal_04",
+    "concept_id": "universal_logic",
+    "secondary_concepts": ["boolean_laws"],
+    "title": "Minimum Gate Count for AND via NAND",
+    "question_text": "What is the minimum number of 2-input NAND gates required to build a 2-input AND gate? Enter the integer.",
+    "question_type": "short_answer",
+    "difficulty": "basic",
+    "options": [],
+    "correct_answer": "2",
+    "distractor_misconceptions": {
+      "1": {
+        "tag": "gate_count_underestimation",
+        "rationale": "NAND produces (AB)', not AB; an additional inverter is required to produce AND."
+      },
+      "3": {
+        "tag": "nand_or_implementation",
+        "rationale": "Confused the 3 NAND gates required for OR with the 2 NAND gates required for AND."
+      },
+      "4": {
+        "tag": "nor_and_confusion",
+        "rationale": "Confused NAND realization of AND with NOR realization of AND."
+      }
+    },
+    "explanation": "AND(A, B) = ((A . B)')'. The first NAND gate computes (A . B)'. The second NAND gate acts as an inverter with tied inputs, yielding ((A . B)')' = A . B. Total = 2 NAND gates.",
+    "follow_up_hint": "How do you turn a NAND (A.B)' into an AND (A.B)? You invert the output with 1 inverter."
+  }
+]

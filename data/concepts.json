@@ -1,0 +1,128 @@
+[
+  {
+    "id": "boolean_laws",
+    "name": "Boolean Laws and Basic Simplification",
+    "short_description": "Fundamental identities including identity, null, idempotent, complement, involution, absorption, and distribution.",
+    "category": "Foundations",
+    "prerequisites": [],
+    "key_formulas": [
+      "A + A = A",
+      "A . A = A",
+      "A + A.B = A (Absorption Law)",
+      "A + A'.B = A + B (Rule of Redundancy)",
+      "A + B.C = (A + B).(A + C) (Second Distributive Law)"
+    ],
+    "explanation": "Boolean algebra operates on binary variables using three fundamental operations: AND (conjunction), OR (disjunction), and NOT (negation). Simplification relies on identities that reduce literal count and gate fan-in.",
+    "common_misconceptions": [
+      {
+        "tag": "absorption_neglect",
+        "description": "Failing to apply absorption (A + AB = A) or unnecessarily expanding it into larger expressions."
+      },
+      {
+        "tag": "distributive_addition_error",
+        "description": "Applying standard elementary algebra assumptions and failing to recognize A + BC = (A + B)(A + C)."
+      },
+      {
+        "tag": "idempotent_double_count",
+        "description": "Treating A + A as 2A or A * A as A^2 instead of applying Boolean idempotence (A + A = A, A * A = A)."
+      },
+      {
+        "tag": "complement_inversion_error",
+        "description": "Confusing complement laws (A + A' = 1, A . A' = 0) with standard arithmetic inversion."
+      }
+    ]
+  },
+  {
+    "id": "demorgan",
+    "name": "De Morgan's Theorems",
+    "short_description": "Transformation rules relating conjunction and disjunction through complementation.",
+    "category": "Algebraic Transformations",
+    "prerequisites": ["boolean_laws"],
+    "key_formulas": [
+      "(A . B)' = A' + B' (NAND theorem: break the line, change the sign)",
+      "(A + B)' = A' . B' (NOR theorem: break the line, change the sign)",
+      "(A' . B)' = A + B'",
+      "(A' + B')' = A . B"
+    ],
+    "explanation": "De Morgan's laws state that the complement of a product (AND) of variables equals the sum (OR) of their individual complements, and the complement of a sum (OR) equals the product (AND) of their individual complements. The universal mnemonic is: 'Break the line, change the sign.'",
+    "common_misconceptions": [
+      {
+        "tag": "demorgan_split_no_flip",
+        "description": "Distributing the complement across terms without toggling the operator (e.g., claiming (A.B)' = A'.B' or (A+B)' = A'+B')."
+      },
+      {
+        "tag": "demorgan_partial_inversion",
+        "description": "Inverting the operator but neglecting to invert each individual variable, or inverting variables but leaving the operator untouched."
+      },
+      {
+        "tag": "demorgan_double_negation_drop",
+        "description": "Failing to simplify double negations (e.g. ((A')') -> A) after applying De Morgan's theorem."
+      },
+      {
+        "tag": "demorgan_order_of_operations",
+        "description": "Applying De Morgan's theorem to a sub-expression before resolving higher-priority operators."
+      }
+    ]
+  },
+  {
+    "id": "karnaugh_maps",
+    "name": "Karnaugh Map (K-Map) Minimization",
+    "short_description": "Visual minimization technique for Boolean expressions of 2 to 4 variables using Gray code adjacency.",
+    "category": "Minimization Techniques",
+    "prerequisites": ["boolean_laws"],
+    "key_formulas": [
+      "Group sizes must strictly be powers of two: 1, 2, 4, 8, 16",
+      "Cell grouping is orthogonal and permits toroidal wrap-around (edges & corners)",
+      "Minimized term contains only variables that do not toggle across the group"
+    ],
+    "explanation": "A Karnaugh map organizes minterms in a multi-dimensional grid ordered by Gray code (only one bit changes between adjacent cells). Grouping adjacent 1s eliminates changing variables, giving minimal Sum of Products (SOP).",
+    "common_misconceptions": [
+      {
+        "tag": "kmap_diagonal_grouping",
+        "description": "Attempting to group diagonally adjacent cells instead of purely horizontal or vertical adjacencies."
+      },
+      {
+        "tag": "kmap_non_power_two",
+        "description": "Forming groups with 3, 5, or 6 cells instead of valid powers of two (1, 2, 4, 8)."
+      },
+      {
+        "tag": "kmap_wrap_around_miss",
+        "description": "Failing to realize that the outer edges and the four corners of a K-map are adjacent due to Gray code wrap-around."
+      },
+      {
+        "tag": "kmap_redundant_groups",
+        "description": "Adding redundant groups where all constituent minterms are already covered by other essential prime implicants."
+      }
+    ]
+  },
+  {
+    "id": "universal_logic",
+    "name": "Universal Logic (NAND/NOR Implementation)",
+    "short_description": "Synthesizing complete logic systems using only NAND or NOR gates.",
+    "category": "Circuit Synthesis",
+    "prerequisites": ["demorgan", "boolean_laws"],
+    "key_formulas": [
+      "NOT(A) = A NAND A = (A.A)' = A'",
+      "AND(A, B) = (A NAND B) NAND (A NAND B) = ((A.B)')' = A.B",
+      "OR(A, B) = (A NAND A) NAND (B NAND B) = (A'.B')' = A + B",
+      "NOT(A) = A NOR A = (A+A)' = A'",
+      "OR(A, B) = (A NOR B) NOR (A NOR B) = ((A+B)')' = A + B",
+      "AND(A, B) = (A NOR A) NOR (B NOR B) = (A'+B')' = A.B"
+    ],
+    "explanation": "Both NAND and NOR are functionally complete; any Boolean function can be realized using solely NAND or solely NOR gates by exploiting De Morgan's duality and input/output inversions.",
+    "common_misconceptions": [
+      {
+        "tag": "nand_or_implementation",
+        "description": "Believing an OR gate from NANDs is formed by inverting the output of a NAND gate (which actually yields an AND gate) rather than inverting the inputs."
+      },
+      {
+        "tag": "nor_and_confusion",
+        "description": "Confusing the dual architectures of NAND and NOR realizations, such as expecting NOR-based AND to require output inversion."
+      },
+      {
+        "tag": "gate_count_underestimation",
+        "description": "Neglecting the dedicated inverter gates required to produce complement signals before feeding into universal gates."
+      }
+    ]
+  }
+]

@@ -1,0 +1,27 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Environment and sensitive keys
+.env
+.env.local
+
+# Pytest / Coverage caches
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local SQLite databases (schema and benchmark JSON are tracked)
+data/studypath.db
+*.db
+*.sqlite3
+
+# OS generated files
+.DS_Store
+Thumbs.db
