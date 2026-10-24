@@ -68,37 +68,6 @@ flowchart TD
     G -->|Remediation Successful| I["Advance to Next Syllabus Challenge"]
 ```
 
----
-
-## 4. Machine Learning & Data Science Methodology
-
-### 4.1 Dense Semantic Embeddings
-- **Model:** `sentence-transformers` using `all-MiniLM-L6-v2` (384-dimensional dense vectors, normalized to unit L2 norm).
-- **Composite Context Formulation:** To ensure clustering captures conceptual mechanics rather than question wording, the embedded text string is synthesized as:
-  $$\text{Context} = \text{Concept} \parallel \text{Question Text} \parallel \text{Student Answer} \parallel \text{Expected Form} \parallel \text{Error Rationale} \parallel \text{Reasoning}$$
-- **Similarity Metric:** Pairwise Cosine Similarity:
-  $$\text{CosineSim}(\mathbf{u}, \mathbf{v}) = \frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\|_2 \|\mathbf{v}\|_2}$$
-  Cosine Distance is computed as $D(\mathbf{u}, \mathbf{v}) = 1 - \text{CosineSim}(\mathbf{u}, \mathbf{v})$.
-
-### 4.2 Distance-Threshold Hierarchical Clustering
-- **Algorithm:** Average-linkage Agglomerative Clustering with a precomputed cosine distance threshold of $0.28$ (corresponding to a minimum cosine similarity of $0.72$).
-- **Handling Unknown $K$:** Because the number of misconceptions in a cohort is unknown beforehand, centroid-based algorithms like KMeans (which require fixed $K$) are inadequate. Distance-threshold clustering groups points based on natural semantic density.
-- **Outlier Rejection:** Isolated responses whose nearest neighbor has distance $> 0.28$ are assigned cluster `-1` (Noise/Outlier) rather than artificially forced into a cluster.
-- **Representative Medoids:** For each cluster, the sample with maximum intra-cluster mean cosine similarity is identified as the cluster medoid.
-
-### 4.3 Statistical Mastery Baseline
-- **Observed Accuracy:** $\hat{p} = \frac{C}{N}$
-- **Laplace Smoothed Mastery (Beta-Binomial posterior mean with prior $\alpha=1, \beta=1$):**
-  $$M_{\text{Laplace}} = \frac{C + 1}{N + 2}$$
-  *Justification:* Prevents a single lucky guess from scoring 100% or an early mistake from dropping mastery to 0%.
-- **Wilson Score 95% Confidence Lower Bound:**
-  $$W_{\text{lower}} = \frac{\hat{p} + \frac{z^2}{2N} - z\sqrt{\frac{\hat{p}(1-\hat{p})}{N} + \frac{z^2}{4N^2}}}{1 + \frac{z^2}{N}}, \quad z=1.96$$
-  *Justification:* Rigorously penalizes small sample sizes, ensuring high confidence is only granted with repeated evidence.
-- **Provisional Mastery Criterion:**
-  $$\text{Status} = \text{"Provisionally Mastered"} \iff N \ge 3 \land M_{\text{Laplace}} \ge 0.80 \land \text{Streak} \ge 2$$
-
----
-
 ## 5. Project Directory Structure
 
 ```
