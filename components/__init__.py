@@ -6,7 +6,11 @@ from .ui_helpers import (
     create_mastery_bar_chart,
     create_pca_scatter_plot,
     create_similarity_heatmap,
-    create_performance_timeline
+    create_performance_timeline,
+    create_daily_study_hours_chart,
+    create_weekly_productivity_chart,
+    create_tasks_completed_chart,
+    create_course_progress_donut
 )
 
 __all__ = [
@@ -14,5 +18,9 @@ __all__ = [
     "create_mastery_bar_chart",
     "create_pca_scatter_plot",
     "create_similarity_heatmap",
-    "create_performance_timeline"
+    "create_performance_timeline",
+    "create_daily_study_hours_chart",
+    "create_weekly_productivity_chart",
+    "create_tasks_completed_chart",
+    "create_course_progress_donut"
 ]
